@@ -1,10 +1,25 @@
-const express = require('express');
-const app = express();
-const port = process.port || 3000;
-app.get('/',(req, res) => res.send('hello world'));
-app.listen(port,() => 
-{
-    // document.write('app running in ' + port);
-    console.log('REST API running on port ' + port);
-}
-)
+// using the http module
+let http = require('http'),
+ 
+// look for PORT environment variable, 
+// else look for CLI argument,
+// else use hard coded value for port 8080
+port = process.env.PORT || 8080;
+ 
+// create a simple server
+let server = http.createServer(function (req, res) {
+ 
+        res.writeHead(200, {
+            'Content-Type': 'text/plain'
+        });
+        res.write('hello heroku!', 'utf-8');
+        res.end();
+ 
+    });
+ 
+// listen on the port
+server.listen(port, function () {
+ 
+    console.log('app up on port: ' + port);
+ 
+});
